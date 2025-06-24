@@ -54,7 +54,6 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
 import io.flutter.view.TextureRegistry;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
@@ -95,22 +94,6 @@ public class FijkPlugin implements MethodCallHandler, FlutterPlugin, ActivityAwa
     private EventChannel mEventChannel;
     private Object mAudioFocusRequest;
     private boolean mAudioFocusRequested = false;
-
-
-    /**
-     * Plugin registration.
-     */
-    @SuppressWarnings("unused")
-    public static void registerWith(Registrar registrar) {
-        final MethodChannel channel = new MethodChannel(registrar.messenger(), "befovy.com/fijk");
-        FijkPlugin plugin = new FijkPlugin();
-        plugin.initWithRegistrar(registrar);
-        channel.setMethodCallHandler(plugin);
-
-        final FijkPlayer player = new FijkPlayer(plugin, true);
-        player.setupSurface();
-        player.release();
-    }
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
